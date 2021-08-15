@@ -1,38 +1,77 @@
-.App {
+h1{
   text-align: center;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+#drop-area {
+  border: 2px dashed #ccc;
+  border-radius: 20px;
+  width: 480px;
+  font-family: sans-serif;
+  margin:  auto;
+  padding: 20px;
+}
+#drop-area.highlight {
+  border-color: purple;
+}
+p {
+  margin-top: 0;
+}
+.my-form {
+  margin-bottom: 10px;
+}
+#gallery {
+  margin-top: 10px;
+}
+#gallery img {
+  width: 150px;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+.button {
+  display: inline-block;
+  padding: 10px;
+  background: #ccc;
+  cursor: pointer;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+.button:hover {
+  background: #ddd;
+}
+#fileElem {
+  display: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+ul,li{
+  list-style:none;
   }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  li{
+    line-height: 10px;
+  }
+  .wrapper{
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
   }
-  to {
-    transform: rotate(360deg);
+  .list{
+  width:300px;
+  height: 100%;
+  margin: auto;
+  background: #fff; /* цвет фона, белый */
+  border: 1px solid #C1C1C1; /* размер и цвет границы блока */
+  /* overflow-x: scroll; 
+overflow-y: scroll; прокрутка по вертикали */
   }
-}
+  .user_item{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+ 
+  .delete_user{
+    display: block;
+    width: 20px;
+    height: 20px;
+    background-color: red;
+  }
+  .nodisplay{
+    opacity: 0;
+  }
