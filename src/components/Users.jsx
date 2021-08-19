@@ -7,15 +7,12 @@ import { connect } from 'react-redux'
 function Users(props) {
   let [filenameState,setFilenameState]=useState(null)
   let dropArea = useRef(null)
-  
   const usersJsx = props.users.map(item => {
-    
     return <li></li>
   })
 
 
-  useEffect(
-    
+  useEffect(  //навесим обработчики событий на div drop-area
     () => {let usersMass=[]
       dropArea.current = document.querySelector("#drop-area");
       window.addEventListener('mouseup', _onDragLeave);
@@ -29,9 +26,8 @@ function Users(props) {
         handleDropedFiles(files[0])
         return false;
       }
-      function handleDropedFiles(file) {
+      function handleDropedFiles(file) {  
         let reader = new FileReader()
-        if(!file){return}
         reader.onloadend = () => { 
           setFilenameState(file.name)
           parseFile(reader.result)
@@ -41,14 +37,13 @@ function Users(props) {
         
        
       
-       async function parseFile(file) {
-       
-        const json = await JSON.parse(file)
+       async function parseFile(file) { //парсим файл и диспатчим отсортированный уникализированный массив
+       const json = await JSON.parse(file)
        parseArray(json)
        props.onGotUsers(Array.from(new Set(usersMass)).sort())   
       }
       
-      function parseArray(arr) {
+      function parseArray(arr) {    //рекурсивно выловим свойство user у всех вложенных обьектов
         if (!Array.isArray(arr)) {
           if (arr.hasOwnProperty('user')) {  usersMass.push(arr.user);}
             if (arr.hasOwnProperty('replies')) parseArray(arr.replies)
@@ -59,7 +54,7 @@ function Users(props) {
             }
         
         }
-      return ()=>{
+      return ()=>{                                        //очистим память после useEffect
       window.removeEventListener('mouseup', _onDragLeave);
       window.removeEventListener('dragenter', _onDragEnter);
       window.removeEventListener('dragover', _onDragOver);
@@ -82,33 +77,22 @@ function Users(props) {
     }
     
     function _onDragLeave(e) {
-    
       e.stopPropagation();
       e.preventDefault();
       return false;
     }
-    
 
-
-
-
-
-//var person = JSON.parse(personData);
- 
     return (<>
-   
-      {filenameState?<h1>{filenameState}</h1>:''}
-      
-      
+      {filenameState?<h1>{filenameState}</h1>:null}
+
     { usersJsx }
     {!filenameState?<div id="drop-area" >
-  <form className="my-form">
- DROP FILE!
-  </form>
-</div>:<div id="drop-area" className="nodisplay"></div>}
-      
+                      <form className="my-form">
+                       DROP FILE!
+                      </form>
+                    </div>
+                  :<div id="drop-area" className="nodisplay"></div>}      
     </>)
-  
 }
 
 
